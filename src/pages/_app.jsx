@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
 import { MDXProvider } from '@mdx-js/react'
 
-import { Layout } fr om '@/components/Layout'
+import { Layout } from '@/components/Layout'
 import * as mdxComponents from '@/components/mdx'
 
 import '@/styles/tailwind.css'
@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
         <title>ORIGIN / Intelligence</title>
         <meta
           name="description"
-          content="Origin is an advanced AI-powered intelligence platform."
+          content=""
         />
       </Head>
       <ThemeProvider attribute="class" disableTransitionOnChange>
