@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
 import { MDXProvider } from '@mdx-js/react'
 
-import { Layout } from '@/components/Layout'
+import { Layout } fr om '@/components/Layout'
 import * as mdxComponents from '@/components/mdx'
 
 import '@/styles/tailwind.css'
@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }) {
           name="description"
           content=""
         />
+        <meta name="apple-mobile-web-app-title" content="ORIGIN" />
       </Head>
       <ThemeProvider attribute="class" disableTransitionOnChange>
         <MDXProvider components={mdxComponents}>
