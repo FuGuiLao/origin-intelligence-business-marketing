@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
         <title>ORIGIN / Intelligence</title>
         <meta
           name="description"
-          content=""
+          content="Origin is an advanced AI-powered intelligence platform."
         />
         <meta name="apple-mobile-web-app-title" content="ORIGIN" />
       </Head>
