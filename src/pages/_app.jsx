@@ -17,7 +17,6 @@ export default function App({ Component, pageProps }) {
           name="description"
           content="Origin is an advanced AI-powered intelligence platform."
         />
-        
       </Head>
       <ThemeProvider attribute="class" disableTransitionOnChange>
         <MDXProvider components={mdxComponents}>
