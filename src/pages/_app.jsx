@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }) {
           name="description"
           content="Origin is an advanced AI-powered intelligence platform."
         />
-        <meta name="apple-mobile-web-app-title" content="ORIGIN" />
+        
       </Head>
       <ThemeProvider attribute="class" disableTransitionOnChange>
         <MDXProvider components={mdxComponents}>
