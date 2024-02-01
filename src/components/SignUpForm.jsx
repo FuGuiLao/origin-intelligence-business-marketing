@@ -28,9 +28,9 @@ export function SignUpForm() {
       return;
     }
   
-    const serviceID = 'service_6ureu2q';
+    const serviceID = 'service_9eddj4w';
     const templateID = 'template_4hdqwxt';
-    const userID = 'PcVIawm6HMW7VKYcV';
+    const userID = 'njnJ53uqzX5AysTcD';
   
     emailjs
       .send(serviceID, templateID, { emailAddress }, userID)
