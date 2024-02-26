@@ -100,8 +100,8 @@ export function Intro() {
 export function IntroFooter() {
   return (
     <p className="flex items-baseline gap-x-2 text-[0.8125rem]/6 text-gray-500">
-      Copyright &copy; {new Date().getFullYear()} Origin Intelligence Inc. All Rights Reserved.\n
-      <a href="privacy-policy.pdf">Privacy Policy</a> | <a href="privacy-policy.pdf">Terms of Use</a> | <a href="privacy-policy.pdf">Data Security</a>
+      Copyright &copy; {new Date().getFullYear()} Origin Intelligence Inc. All Rights Reserved.
+      <a href="privacy-policy.pdf">Privacy Policy</a>
      </p>
   )
 }
