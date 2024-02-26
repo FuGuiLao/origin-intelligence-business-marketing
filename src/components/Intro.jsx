@@ -101,7 +101,7 @@ export function IntroFooter() {
   return (
     <p className="flex items-baseline gap-x-2 text-[0.8125rem]/6 text-gray-500">
       Copyright &copy; {new Date().getFullYear()} Origin Intelligence Inc. All Rights Reserved.
-      <br>
+    
       Privacy
      </p>
   )
