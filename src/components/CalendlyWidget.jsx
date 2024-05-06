@@ -1,15 +1,19 @@
+import React, { useEffect } from 'react';
+import { useTheme } from 'next-themes'
+
 function CalendlyWidget() {
+  let { resolvedTheme } = useTheme()
+
+  useEffect(() => {
+    const head = document.querySelector('head');
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://assets.calendly.com/assets/external/widget.js');
+    head.appendChild(script);
+  }, []);
+
   return (
-    <>
-      <iframe
-        src="https://outlook.office365.com/book/ORIGINClientConsultation@origininvestigations.com/"
-        className="h-full w-full"
-      />
-      <div className="fixed left-0 top-[80px] h-[28px] w-full bg-white max-sm:h-[34px]" />
-      <div className="fixed left-[20px] top-[80px] h-full w-[20px] bg-white max-sm:hidden" />
-      <div className="fixed right-[40px] top-[80px] h-full w-[16px] bg-white max-sm:hidden" />
-    </>
-  )
+    <div className="calendly-inline-widget" data-url={`https://calendly.com/origin-intelligence/client-consultation-web/?hide_landing_page_details=1&hide_gdpr_banner=1${resolvedTheme === 'dark' ? "&primary_color=ffffff&text_color=d1d5db&background_color=040711" : "&primary_color=040711"}`} style={{ minWidth: '320px', height: '100%' }} />
+  );
 }
 
-export default CalendlyWidget
+export default CalendlyWidget;
