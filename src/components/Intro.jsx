@@ -100,7 +100,7 @@ export function Intro() {
 export function IntroFooter() {
   return (
     <p className="flex items-baseline gap-x-2 text-[0.8125rem]/6 text-gray-500">
-      &copy; {new Date().getFullYear()} Origin Intelligence Inc. All Rights Reserved.</br>
+      &copy; {new Date().getFullYear()} Origin Intelligence Inc. All Rights Reserved.<br />
       Privacy Policy | Terms of Use | Data Security
      </p>
   )
