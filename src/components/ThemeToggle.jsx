@@ -20,10 +20,26 @@ export function ThemeToggle() {
 
   useEffect(() => {
     setMounted(true)
-  }, [])
+
+    // Automatically set the theme based on the user's system preference on initial load
+    const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(userPrefersDark ? 'dark' : 'light');
+
+    // Optional: Listen for system preference changes and update the theme
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e) => {
+      setTheme(e.matches ? 'dark' : 'light');
+    };
+    mediaQuery.addEventListener('change', handleChange);
+
+    // Cleanup listener on component unmount
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, [setTheme]);
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
