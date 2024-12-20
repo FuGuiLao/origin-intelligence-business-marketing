@@ -11,10 +11,12 @@ export function SignUpForm() {
   let id = useId();
 
   useEffect(() => {
-    // Initialize form start time
+    console.log('useEffect executed'); // Debugging
+
+    // Set the form start time
     setFormStartTime(Date.now());
 
-    // Set JavaScript validation field
+    // Ensure the JavaScript check field is set
     const jsCheckField = document.getElementById('jsCheck');
     if (jsCheckField) {
       jsCheckField.value = 'passed';
@@ -122,6 +124,8 @@ export function SignUpForm() {
       <Button type="submit" arrow={!isSent} disabled={isSent}>
         {isSent ? 'Thank You' : 'Get Access'}
       </Button>
+      <div className="absolute inset-0 -z-10 rounded-lg transition peer-focus:ring-4 peer-focus:ring-sky-300/15" />
+      <div className="absolute inset-0 -z-10 rounded-lg bg-white/2.5 ring-1 ring-white/15 transition peer-focus:ring-sky-300" />
     </form>
   );
 }
