@@ -8,22 +8,14 @@ export function SignUpForm() {
   const [errorText, setErrorText] = useState('');
   const [formStartTime, setFormStartTime] = useState(Date.now());
   const [honeypot, setHoneypot] = useState('');
+  const [jsCheckValue, setJsCheckValue] = useState(''); // JavaScript check via state
   let id = useId();
 
   useEffect(() => {
     console.log('useEffect executed'); // Debugging
-
-    // Set the form start time
     setFormStartTime(Date.now());
-
-    // Ensure the JavaScript check field is set
-    const jsCheckField = document.getElementById('jsCheck');
-    if (jsCheckField) {
-      jsCheckField.value = 'passed';
-      console.log('JavaScript check set:', jsCheckField.value); // Debugging
-    } else {
-      console.error('JavaScript check field not found!'); // Debugging
-    }
+    setJsCheckValue('passed'); // Set JavaScript check
+    console.log('JavaScript check set via state: passed'); // Debugging
   }, []);
 
   const validateEmail = (email) => {
@@ -56,9 +48,8 @@ export function SignUpForm() {
       return;
     }
 
-    const jsCheckField = document.getElementById('jsCheck');
-    console.log('JavaScript check value:', jsCheckField?.value); // Debugging
-    if (!jsCheckField || jsCheckField.value !== 'passed') {
+    console.log('JavaScript check value via state:', jsCheckValue); // Debugging
+    if (jsCheckValue !== 'passed') {
       setErrorText('Spam detected. Please try again.');
       return;
     }
@@ -100,7 +91,7 @@ export function SignUpForm() {
         autoComplete="off"
       />
       {/* JavaScript Check Hidden Field */}
-      <input type="hidden" name="jsCheck" id="jsCheck" value="" />
+      <input type="hidden" name="jsCheck" id="jsCheck" value={jsCheckValue} />
       <label htmlFor={id} className="sr-only">
         Email address
       </label>
@@ -124,8 +115,6 @@ export function SignUpForm() {
       <Button type="submit" arrow={!isSent} disabled={isSent}>
         {isSent ? 'Thank You' : 'Get Access'}
       </Button>
-      <div className="absolute inset-0 -z-10 rounded-lg transition peer-focus:ring-4 peer-focus:ring-sky-300/15" />
-      <div className="absolute inset-0 -z-10 rounded-lg bg-white/2.5 ring-1 ring-white/15 transition peer-focus:ring-sky-300" />
     </form>
   );
 }
