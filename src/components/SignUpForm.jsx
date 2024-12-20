@@ -11,13 +11,16 @@ export function SignUpForm() {
   let id = useId();
 
   useEffect(() => {
-    // Reset form start time whenever the form loads
+    // Initialize form start time
     setFormStartTime(Date.now());
 
-    // Populate JavaScript check hidden field
+    // Set JavaScript validation field
     const jsCheckField = document.getElementById('jsCheck');
     if (jsCheckField) {
       jsCheckField.value = 'passed';
+      console.log('JavaScript check set:', jsCheckField.value); // Debugging
+    } else {
+      console.error('JavaScript check field not found!'); // Debugging
     }
   }, []);
 
@@ -38,31 +41,32 @@ export function SignUpForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Honeypot validation
+    console.log('Honeypot value:', honeypot); // Debugging
     if (honeypot) {
       setErrorText('Spam detected. Please try again.');
       return;
     }
 
-    // Time-based validation
     const timeElapsed = Date.now() - formStartTime;
+    console.log('Time elapsed since form load:', timeElapsed); // Debugging
     if (timeElapsed < 2000) {
       setErrorText('Form submission too fast. Please try again.');
       return;
     }
 
-    // JavaScript check validation
     const jsCheckField = document.getElementById('jsCheck');
+    console.log('JavaScript check value:', jsCheckField?.value); // Debugging
     if (!jsCheckField || jsCheckField.value !== 'passed') {
       setErrorText('Spam detected. Please try again.');
       return;
     }
 
-    // Email validation
     if (!validateEmail(emailAddress)) {
       setErrorText('Invalid Email Address');
       return;
     }
+
+    console.log('All validations passed!'); // Debugging
 
     const serviceID = 'service_9eddj4w';
     const templateID = 'template_4hdqwxt';
@@ -73,8 +77,10 @@ export function SignUpForm() {
       .then((response) => {
         setIsSent(true);
         setEmailAddress('A representative will contact you.');
+        console.log('Email sent successfully!', response);
       })
       .catch((error) => {
+        console.error('Error sending email:', error); // Debugging
         setErrorText('Error Sending Email');
       });
   };
@@ -84,12 +90,13 @@ export function SignUpForm() {
       {/* Honeypot Field */}
       <input
         type="text"
-        name="user_phone"
+        name="anti_spam_field"
         value={honeypot}
         onChange={(e) => setHoneypot(e.target.value)}
-        style={{ position: 'absolute', left: '-9999px' }}
+        className="hidden-field"
         tabIndex="-1"
         autoComplete="off"
+        style={{ position: 'absolute', left: '-9999px' }}
       />
       {/* JavaScript Check Hidden Field */}
       <input type="hidden" name="jsCheck" id="jsCheck" value="" />
