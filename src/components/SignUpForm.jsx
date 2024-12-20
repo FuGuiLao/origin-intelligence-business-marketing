@@ -40,7 +40,6 @@ export function SignUpForm() {
 
     // Honeypot validation
     if (honeypot) {
-      console.log('Spam bot detected via honeypot!');
       setErrorText('Spam detected. Please try again.');
       return;
     }
@@ -55,7 +54,6 @@ export function SignUpForm() {
     // JavaScript check validation
     const jsCheckField = document.getElementById('jsCheck');
     if (!jsCheckField || jsCheckField.value !== 'passed') {
-      console.log('Spam bot detected via JS check!');
       setErrorText('Spam detected. Please try again.');
       return;
     }
@@ -75,7 +73,6 @@ export function SignUpForm() {
       .then((response) => {
         setIsSent(true);
         setEmailAddress('A representative will contact you.');
-        console.log('Email sent successfully!', response);
       })
       .catch((error) => {
         setErrorText('Error Sending Email');
