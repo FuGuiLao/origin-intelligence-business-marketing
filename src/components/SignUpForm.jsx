@@ -6,17 +6,23 @@ export function SignUpForm() {
   const [emailAddress, setEmailAddress] = useState('');
   const [isSent, setIsSent] = useState(false);
   const [errorText, setErrorText] = useState('');
-  const [formStartTime, setFormStartTime] = useState(Date.now()); // Track form start time
-  const [honeypot, setHoneypot] = useState(''); // Honeypot field state
+  const [formStartTime, setFormStartTime] = useState(Date.now());
+  const [honeypot, setHoneypot] = useState('');
   let id = useId();
 
   useEffect(() => {
     // Reset form start time whenever the form loads
     setFormStartTime(Date.now());
+
+    // Populate JavaScript check hidden field
+    const jsCheckField = document.getElementById('jsCheck');
+    if (jsCheckField) {
+      jsCheckField.value = 'passed';
+    }
   }, []);
 
   const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
   };
 
@@ -35,17 +41,28 @@ export function SignUpForm() {
     // Honeypot validation
     if (honeypot) {
       console.log('Spam bot detected via honeypot!');
+      setErrorText('Spam detected. Please try again.');
       return;
     }
 
     // Time-based validation
     const timeElapsed = Date.now() - formStartTime;
-    if (timeElapsed < 2000) { // 2 seconds
+    if (timeElapsed < 2000) {
       setErrorText('Form submission too fast. Please try again.');
       return;
     }
 
+    // JavaScript check validation
+    const jsCheckField = document.getElementById('jsCheck');
+    if (!jsCheckField || jsCheckField.value !== 'passed') {
+      console.log('Spam bot detected via JS check!');
+      setErrorText('Spam detected. Please try again.');
+      return;
+    }
+
+    // Email validation
     if (!validateEmail(emailAddress)) {
+      setErrorText('Invalid Email Address');
       return;
     }
 
@@ -70,13 +87,15 @@ export function SignUpForm() {
       {/* Honeypot Field */}
       <input
         type="text"
-        name="honeypot"
+        name="user_phone"
         value={honeypot}
         onChange={(e) => setHoneypot(e.target.value)}
-        style={{ display: 'none' }} // Hidden field
+        style={{ position: 'absolute', left: '-9999px' }}
         tabIndex="-1"
         autoComplete="off"
       />
+      {/* JavaScript Check Hidden Field */}
+      <input type="hidden" name="jsCheck" id="jsCheck" value="" />
       <label htmlFor={id} className="sr-only">
         Email address
       </label>
