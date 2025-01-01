@@ -15,7 +15,7 @@ export function FreeChapters() {
     setFormStartTime(Date.now());
   }, []);
 
-  const blockedIPs = ['192.168.1.1', '203.0.113.10'];
+  const blockedIPs = ['131.0.6778.87'];
 
   const getPublicIP = async () => {
     try {
